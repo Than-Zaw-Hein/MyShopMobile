@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MyShop" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/primaryColor</item>
+    </style>
+
+
+    <style name="CalenderViewCustom" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+
+    </style>
+</resources>
