@@ -51,7 +51,7 @@ fun MyDatePickerWithTitle(
         Text(buildAnnotatedString {
             withStyle(
                 style = SpanStyle(
-                    fontWeight = FontWeight.Bold, fontSize = 20.sp, letterSpacing = 0.15.sp
+                    fontWeight = FontWeight.Bold, fontSize = 18.sp, letterSpacing = 0.15.sp
                 )
             ) {
                 append(title)

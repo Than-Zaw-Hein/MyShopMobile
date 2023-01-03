@@ -2,90 +2,81 @@
 
 package com.tzh.myshop.ui.screen.enquiry
 
-import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.tzh.myshop.common.ulti.PopUpState
-import com.tzh.myshop.common.navigation.Route
 import com.tzh.myshop.data.database.entity.Product
 import com.tzh.myshop.ui.shareComponent.*
-import com.tzh.myshop.ui.shareComponent.Dimen.paddingDefault
 import com.tzh.myshop.ui.theme.backgroundColor
-import com.tzh.myshop.ui.viewModel.EnquiryViewModel
+import com.tzh.myshop.ui.viewModel.ProductDetailViewModel
 
 @Composable
 fun EnquiryScreen(
-    navController: NavController, scaffoldState: ScaffoldState, viewModel: EnquiryViewModel
+    navController: NavController, scaffoldState: ScaffoldState, viewModel: ProductDetailViewModel
 ) {
-    val context = LocalContext.current
-    val list = viewModel.filterList
-    var productName by remember { mutableStateOf("") }
-
-    val uiState by viewModel.uiState.collectAsState()
-
-    if (uiState.isSaveSuccess != null) {
-        if (uiState.isDelete) {
-            if (uiState.isSaveSuccess!!) {
-                Toast.makeText(context, "Successfully delete", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(context, "Fail to delete this product", Toast.LENGTH_LONG).show()
-            }
-        }
-        viewModel.getData(productName)
-        viewModel.doneAction()
-    }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingDefault)
-    ) {
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = paddingDefault),
-            value = productName,
-            onValueChange = {
-                productName = it
-                viewModel.getData(productName)
-            },
-            singleLine = true,
-            textStyle = MaterialTheme.typography.body2,
-            placeholder = {
-                Text(text = "Search with Product Name")
-            },
-            trailingIcon = {
-                IconButton(onClick = {
-                    viewModel.getData(productName)
-                }) {
-                    Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
-                }
-            },
-        )
-        Dimen.DefaultMarginHeight()
-        ListBody(
-            list,
-            onClick = {
-                viewModel.goToDetail(product = it)
-                navController.navigate(Route.StockEnquiryDetail.route)
-            },
-            onDelete = {
-                viewModel.deleteProduct(it)
-            },
-        )
-
-    }
+//    val context = LocalContext.current
+//    val uiState by viewModel.uiState.collectAsState()
+//
+//    if (uiState.isSaveSuccess != null) {
+//        if (uiState.isDelete) {
+//            if (uiState.isSaveSuccess!!) {
+//                Toast.makeText(context, "Successfully delete", Toast.LENGTH_LONG).show()
+//            } else {
+//                Toast.makeText(context, "Fail to delete this product", Toast.LENGTH_LONG).show()
+//            }
+//        }
+//        viewModel.getData(uiState.productName)
+//        viewModel.doneAction()
+//    }
+//
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .padding(paddingDefault)
+//    ) {
+//        OutlinedTextField(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(top = paddingDefault),
+//            value = uiState.productName,
+//            onValueChange = {
+//                viewModel.setProductNameTextChange(it)
+//                viewModel.getData(it)
+//            },
+//            singleLine = true,
+//            textStyle = MaterialTheme.typography.body2,
+//            placeholder = {
+//                Text(text = "Search with Product Name")
+//            },
+//            trailingIcon = {
+//                IconButton(onClick = {
+//                    viewModel.getData(uiState.)
+//                }) {
+//                    Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
+//                }
+//            },
+//        )
+//        Dimen.DefaultMarginHeight()
+//        ListBody(
+//            list,
+//            onClick = {
+//                viewModel.goToDetail(product = it)
+//                navController.navigate(Route.StockEnquiryDetail.route)
+//            },
+//            onDelete = {
+//                viewModel.deleteProduct(it)
+//            },
+//        )
+//
+//    }
 }
 
 @Composable

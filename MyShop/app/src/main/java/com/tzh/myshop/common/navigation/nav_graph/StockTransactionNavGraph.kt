@@ -3,8 +3,10 @@ package com.tzh.myshop.common.navigation.nav_graph
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.navArgument
 import com.tzh.myshop.common.ulti.Constant.rememberParentEntry
 import com.tzh.myshop.common.navigation.ROOT_STOCK_TRANSACTION_ROUTE
 import com.tzh.myshop.common.navigation.Route
@@ -19,16 +21,18 @@ fun NavGraphBuilder.stockTransactionNavGraph(navController: NavController, curre
     ) {
         composable(route = Route.StockTransaction.route) {
             currentRoute(Route.StockTransaction)
-            val parentEntry = it.rememberParentEntry(navController = navController)
-            val viewModel: TransactionViewModel = hiltViewModel(parentEntry)
-            TransactionScreen(navController, viewModel)
+            TransactionScreen(navController, hiltViewModel())
         }
 
-        composable(route = Route.StockTransactionDetail.route) {
+        composable(route = Route.StockTransactionDetail.route, arguments = listOf(navArgument("header") {
+            type = NavType.StringType
+        }, navArgument("fromDate") {
+            type = NavType.StringType
+        }, navArgument("toDate") {
+            type = NavType.StringType
+        })) {
             currentRoute(Route.StockTransactionDetail)
-            val parentEntry = it.rememberParentEntry(navController = navController)
-            val viewModel: TransactionViewModel = hiltViewModel(parentEntry)
-            TransactionDetailScreen(navController, viewModel)
+            TransactionDetailScreen(hiltViewModel())
         }
     }
 }

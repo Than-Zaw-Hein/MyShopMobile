@@ -3,6 +3,8 @@ package com.tzh.myshop.ui.screen.stockIn
 import android.R
 import android.net.Uri
 import android.widget.Toast
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -13,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.tzh.myshop.common.ulti.FloatingActionUIStates
 import com.tzh.myshop.common.navigation.Route
@@ -20,6 +23,7 @@ import com.tzh.myshop.ui.shareComponent.ChoosePhotoLayout
 import com.tzh.myshop.ui.shareComponent.Dimen
 import com.tzh.myshop.ui.shareComponent.Dimen.paddingDefault
 import com.tzh.myshop.ui.shareComponent.MyTextFieldWithTitle
+import com.tzh.myshop.ui.shareComponent.MyTopAppBar
 import com.tzh.myshop.ui.theme.accentAmber
 import com.tzh.myshop.ui.theme.primaryCharcoal
 import com.tzh.myshop.ui.viewModel.StockInViewModel
@@ -27,9 +31,9 @@ import com.tzh.myshop.ui.viewModel.StockInViewModel
 @Composable
 fun StockInScreen(
     navController: NavController,
-    viewModel: StockInViewModel,
     onComposing: ((state: FloatingActionUIStates) -> Unit)? = null,
-    scaffoldState: ScaffoldState
+    scaffoldState: ScaffoldState,
+    viewModel: StockInViewModel = hiltViewModel(),
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
@@ -57,9 +61,12 @@ fun StockInScreen(
     onComposing?.invoke(
         FloatingActionUIStates(
             onFloatingActionButton = {
-                FloatingActionButton(backgroundColor = primaryCharcoal, onClick = {
-                    viewModel.createProduct()
-                }) {
+                FloatingActionButton(
+                    backgroundColor = primaryCharcoal,
+                    onClick = {
+                        viewModel.createProduct()
+                    },
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_menu_save), tint = Color.White, contentDescription = null
                     )

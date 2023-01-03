@@ -39,7 +39,6 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        @OptIn(DelicateCoroutinesApi::class)
         fun getInstance(applicationContext: Context): AppDatabase {
 
             return INSTANCE ?: synchronized(this) {

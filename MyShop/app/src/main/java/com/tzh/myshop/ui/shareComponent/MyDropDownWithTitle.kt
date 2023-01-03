@@ -38,7 +38,7 @@ fun MyDropDownWithTitle(
             Text(buildAnnotatedString {
                 withStyle(
                     style = SpanStyle(
-                        fontWeight = FontWeight.Bold, fontSize = 20.sp, letterSpacing = 0.15.sp
+                        fontWeight = FontWeight.Bold, fontSize = 18.sp, letterSpacing = 0.15.sp
                     )
                 ) {
                     append(title)
@@ -46,7 +46,7 @@ fun MyDropDownWithTitle(
                 if (isNecessary) {
                     withStyle(
                         style = SpanStyle(
-                            fontSize = 20.sp, color = Color.Red,
+                            fontSize = 18.sp, color = Color.Red,
                         )
                     ) {
                         append("*")

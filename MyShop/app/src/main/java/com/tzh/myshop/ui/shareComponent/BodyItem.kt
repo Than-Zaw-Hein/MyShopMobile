@@ -14,7 +14,7 @@ fun BodyItem(text: String, modifier: Modifier = Modifier, textAlign: TextAlign =
     Text(
         text = text,
         modifier = modifier.padding(4.dp),
-        fontSize = 13.sp,
+        fontSize = 12.sp,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
         textAlign = textAlign

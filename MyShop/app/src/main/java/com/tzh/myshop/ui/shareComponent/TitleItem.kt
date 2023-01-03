@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun TitleItem(title: String, modifier: Modifier = Modifier,style :TextStyle = MaterialTheme.typography.h6.copy(fontSize = 15.sp)) {
+fun TitleItem(title: String, modifier: Modifier = Modifier,style :TextStyle = MaterialTheme.typography.h6.copy(fontSize = 14.sp)) {
     Text(
         text = title, modifier = modifier.padding(4.dp), style = style
     )

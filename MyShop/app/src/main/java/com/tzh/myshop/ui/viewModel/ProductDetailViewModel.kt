@@ -10,11 +10,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tzh.myshop.common.ulti.Constant
 import com.tzh.myshop.common.ulti.Extension.toPrice
-import com.tzh.myshop.data.database.dao.ProductDao
 import com.tzh.myshop.data.database.entity.Product
 import com.tzh.myshop.domain.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,46 +25,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EnquiryViewModel @Inject constructor(
-    val productDao: ProductDao, private val application: Application, private val productRepository: ProductRepository
+class ProductDetailViewModel @Inject constructor(
+    private val application: Application, private val productRepository: ProductRepository, savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
-    var productList = mutableStateListOf<Product>()
-    var filterList = mutableStateListOf<Product>()
-
-    init {
-        getData()
-    }
-
-    fun getData(productName: String = "") {
-        viewModelScope.launch {
-            productList.clear()
-            filterList.clear()
-            val list = if (productName.isNotEmpty()) {
-                productDao.findByProductName("$productName%")
-            } else {
-                productDao.getAllProduct()
-            }
-            productList.addAll(list)
-            filterList = productList
-        }
-    }
-
-    fun goToDetail(product: Product) {
-        selectedProduct = product
-        productName = product.productName
-        qty = product.qty.toString()
-        originalPrice = product.originalPrice.toString()
-        sellingPrice = product.sellingPrice.toString()
-        profit = product.profit.toString()
-        imageList.clear()
-        imageList.addAll(product.imageList)
-        calculateProfit()
-    }
-
-    //For edit
     private val _uiState = MutableStateFlow(EnquiryDetailUiState())
     val uiState = _uiState.asStateFlow()
+
     lateinit var selectedProduct: Product
 
     var imageList = mutableStateListOf<String?>(null, null, null)
@@ -87,6 +53,19 @@ class EnquiryViewModel @Inject constructor(
         calculateProfit()
     }
     var profit by mutableStateOf("0")
+
+    fun setProduct(product: Product){
+        selectedProduct = product
+        productName = product.productName
+        qty = product.qty.toString()
+        originalPrice = product.originalPrice.toString()
+        sellingPrice = product.sellingPrice.toString()
+        profit = product.profit.toString()
+        imageList.clear()
+        imageList.addAll(product.imageList)
+        calculateProfit()
+    }
+
 
     private fun calculateProfit() {
         val sellPrice = sellingPrice.toLong()
@@ -148,28 +127,6 @@ class EnquiryViewModel @Inject constructor(
             Log.e("ASDASd", e.message.toString())
         }
     }
-
-    fun deleteProduct(product: Product) {
-        viewModelScope.launch {
-            _uiState.update {
-                it.copy(isLoading = true)
-            }
-            try {
-                productRepository.deleteProduct(product)
-                _uiState.update {
-                    it.copy(isLoading = false, isSaveSuccess = true, error = null, isDelete = true)
-                }
-
-            } catch (e: Exception) {
-                Log.e("ADASd", e.toString())
-                _uiState.update {
-                    it.copy(isLoading = false, error = e.message, isSaveSuccess = false, isDelete = true)
-                }
-            }
-        }
-    }
-
-
     fun doneShowErrorMessage() {
         _uiState.update {
             it.copy(error = null)
@@ -179,9 +136,12 @@ class EnquiryViewModel @Inject constructor(
     fun doneAction() {
         _uiState.update { EnquiryDetailUiState() }
     }
-
 }
 
 data class EnquiryDetailUiState(
-    val isLoading: Boolean = false, val isSaveSuccess: Boolean? = null, val error: String? = null, val isDelete: Boolean = false
+    var productName: String = "",
+    val isLoading: Boolean = false,
+    val isSaveSuccess: Boolean? = null,
+    val error: String? = null,
+    val isDelete: Boolean = false
 )

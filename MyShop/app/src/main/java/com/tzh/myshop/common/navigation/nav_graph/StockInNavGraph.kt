@@ -25,9 +25,7 @@ fun NavGraphBuilder.stockInNavGraph(
     ) {
         composable(route = Route.StockIN.route) {
             currentRoute(Route.StockIN)
-            val parentEntry = it.rememberParentEntry(navController = navController)
-            val viewModel: StockInViewModel = hiltViewModel(parentEntry)
-            StockInScreen(navController, viewModel, onComposing, scaffoldState = scaffoldState)
+            StockInScreen(navController, onComposing, scaffoldState = scaffoldState)
         }
     }
 }

@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.tzh.myshop.common.ulti.Constant
 import com.tzh.myshop.common.navigation.Route
+import com.tzh.myshop.common.ulti.Extension.toJson
 import com.tzh.myshop.data.database.entity.TransactionHeader
 import com.tzh.myshop.ui.shareComponent.*
 import com.tzh.myshop.ui.shareComponent.Dimen.paddingDefault
@@ -78,8 +79,11 @@ fun TransactionScreen(navController: NavController, viewModel: TransactionViewMo
                     ListItem(
                         transactionHeader = item, transactionType = transactionType,
                         onClick = {
-                            viewModel.getTransactionDetailList(it)
-                            navController.navigate(Route.StockTransactionDetail.route)
+                            navController.navigate(
+                                Route.StockTransactionDetail.navigateWithTransactionHeader(
+                                    it.toJson(), viewModel.selectFromDate.value, viewModel.selectToDate.value
+                                )
+                            )
                         },
                     )
                     Dimen.DefaultMarginHeight()

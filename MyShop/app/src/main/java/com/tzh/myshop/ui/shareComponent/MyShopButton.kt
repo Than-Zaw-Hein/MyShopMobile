@@ -49,7 +49,7 @@ object MyShopButton {
 
     @Composable
     fun ButtonText(text: String) {
-        Text(text = text, fontSize = 18.sp)
+        Text(text = text, fontSize = 16.sp)
     }
 
     @Composable

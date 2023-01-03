@@ -8,6 +8,7 @@ import com.tzh.myshop.data.database.dao.TransactionHeaderDao
 import com.tzh.myshop.data.database.entity.Product
 import com.tzh.myshop.data.database.entity.TransactionDetail
 import com.tzh.myshop.data.database.entity.TransactionHeader
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 
@@ -16,6 +17,15 @@ class ProductRepository @Inject constructor(
     private val transactionHeaderDao: TransactionHeaderDao,
     private val transactionDetailDao: TransactionDetailDao,
 ) {
+
+
+    suspend fun getProduct(productName: String): List<Product> {
+        return if (productName.isNotEmpty()) {
+            productDao.findByProductName("$productName%")
+        } else {
+            productDao.getAllProduct()
+        }
+    }
 
     suspend fun createProduct(product: Product) {
         val productId = productDao.insert(product)

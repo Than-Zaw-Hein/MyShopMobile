@@ -4,10 +4,9 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.tzh.myshop.common.navigation.ROOT_STOCK_OUT_ROUTE
 import com.tzh.myshop.common.navigation.ROOT_STOCK_TAKE_ROUTE
 import com.tzh.myshop.common.navigation.Route
-import com.tzh.myshop.ui.screen.HomeScreen
+import com.tzh.myshop.ui.screen.home.HomeScreen
 
 
 fun NavGraphBuilder.stockTakeNavGraph(navController: NavController, currentRoute: (Route) -> Unit) {

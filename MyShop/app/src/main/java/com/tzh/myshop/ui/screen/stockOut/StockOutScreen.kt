@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.tzh.myshop.common.ulti.Extension.showToast
 import com.tzh.myshop.common.ulti.Extension.toPrice
@@ -33,7 +34,7 @@ import com.tzh.myshop.ui.theme.backgroundColor
 import com.tzh.myshop.ui.viewModel.StockOutViewModel
 
 @Composable
-fun StockOutScreen(navController: NavController, viewModel: StockOutViewModel) {
+fun StockOutScreen(navController: NavController, viewModel: StockOutViewModel = hiltViewModel()) {
     val context = LocalContext.current
     var isAddProductShowDialog by remember { mutableStateOf(PopUpState.CLOSE) }
     var isShowDialog by remember { mutableStateOf(PopUpState.CLOSE) }
@@ -59,10 +60,10 @@ fun StockOutScreen(navController: NavController, viewModel: StockOutViewModel) {
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxHeight()
             .padding(paddingDefault)
+            .padding(bottom = 56.dp)
     ) {
-
         ItemHeader()
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(productList, key = {
@@ -96,7 +97,6 @@ fun StockOutScreen(navController: NavController, viewModel: StockOutViewModel) {
         ) {
             if (productList.isEmpty()) {
                 context.showToast("Product must not be empty")
-
             } else {
                 isConfirmDialog = PopUpState.OPEN
             }

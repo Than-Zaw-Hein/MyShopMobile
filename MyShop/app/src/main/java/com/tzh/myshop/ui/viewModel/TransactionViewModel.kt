@@ -73,25 +73,5 @@ class TransactionViewModel @Inject constructor(
         }
     }
 
-    //For transaction Detail
-    var transactionDetail = mutableStateListOf<TransactionDetail>()
-    lateinit var transactionHeader: TransactionHeader
-
-    var isSale: Boolean = false
-
-    fun getTransactionDetailList(header: TransactionHeader) {
-        viewModelScope.launch {
-            Log.e("TransactionHeader", header.toString())
-            transactionDetail.clear()
-            transactionHeader = header
-            isSale = header.typeName == Constant.TransactionType.SALE.getTypeName()
-            var mList = repository.getTransactionDetailList(header.id!!)
-            transactionDetail.addAll(mList)
-            transactionDetail.forEach {
-                Log.e("TransactionDetail", it.toString())
-            }
-        }
-    }
-
 
 }

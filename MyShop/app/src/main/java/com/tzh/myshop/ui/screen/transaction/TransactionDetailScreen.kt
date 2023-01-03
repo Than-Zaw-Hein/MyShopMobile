@@ -1,15 +1,19 @@
 package com.tzh.myshop.ui.screen.transaction
 
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.tzh.myshop.data.database.entity.TransactionDetail
 import com.tzh.myshop.data.database.entity.TransactionHeader
@@ -18,21 +22,26 @@ import com.tzh.myshop.ui.shareComponent.Dimen
 import com.tzh.myshop.ui.shareComponent.Dimen.paddingDefault
 import com.tzh.myshop.ui.shareComponent.TitleItem
 import com.tzh.myshop.ui.theme.backgroundColor
+import com.tzh.myshop.ui.viewModel.TransactionDetailViewModel
 import com.tzh.myshop.ui.viewModel.TransactionViewModel
 
 @Composable
-fun TransactionDetailScreen(navController: NavController, viewModel: TransactionViewModel) {
+fun TransactionDetailScreen(viewModel: TransactionDetailViewModel = hiltViewModel()) {
+    val uiState by viewModel.uiState.collectAsState()
 
-    val transactionDetailList = viewModel.transactionDetail
-    val transactionHeader = viewModel.transactionHeader
-    val isSale = viewModel.isSale
-    if (isSale) {
-        SaleDetailBody(transactionHeader, transactionDetailList, viewModel.selectFromDate.value, viewModel.selectToDate.value)
-    } else {
-        if (transactionDetailList.isNotEmpty()) {
-            DetailBody(transactionDetail = transactionDetailList[0], viewModel.transactionHeader!!.typeName)
+    if (uiState.transactionHeader != null) {
+        if (uiState.isSale) {
+            SaleDetailBody(
+                uiState.transactionHeader!!, uiState.transactionDetail, uiState.selectedFromDate, uiState.selectedToDate
+            )
+        } else {
+            if (uiState.transactionDetail.isNotEmpty()) {
+                DetailBody(transactionDetail = uiState.transactionDetail[0], uiState.transactionHeader!!.typeName)
+            }
         }
+        Log.e("data", uiState.toString())
     }
+
 }
 
 @Composable
