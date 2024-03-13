@@ -58,75 +58,100 @@ fun StockInScreen(
         viewModel.doneAction()
     }
 
-    onComposing?.invoke(
-        FloatingActionUIStates(
-            onFloatingActionButton = {
-                FloatingActionButton(
-                    backgroundColor = primaryCharcoal,
-                    onClick = {
-                        viewModel.createProduct()
-                    },
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_menu_save), tint = Color.White, contentDescription = null
-                    )
-                }
-            },
-        ),
-    )
+//    onComposing?.invoke(
+//        FloatingActionUIStates(
+//            onFloatingActionButton = {
+//                FloatingActionButton(
+//                    backgroundColor = primaryCharcoal,
+//                    onClick = {
+//                        viewModel.createProduct()
+//                    },
+//                ) {
+//                    Icon(
+//                        painter = painterResource(id = R.drawable.ic_menu_save), tint = Color.White, contentDescription = null
+//                    )
+//                }
+//            },
+//        ),
+//    )
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(8.dp)
+    Scaffold(
+        scaffoldState = scaffoldState,
+        floatingActionButton = {
+            FloatingActionButton(
+                modifier = Modifier.padding(bottom = 56.dp),
+                backgroundColor = primaryCharcoal,
+                onClick = {
+                    viewModel.createProduct()
+                },
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_menu_save), tint = Color.White, contentDescription = null
+                )
+            }
+        },
     ) {
-        MyTextFieldWithTitle(title = "ProductName", value = viewModel.productName, onValueChange = { viewModel.productName = it })
-        Dimen.DefaultMarginHeight()
-        MyTextFieldWithTitle(
-            title = "Qty", value = viewModel.qty, onValueChange = viewModel.qtyTextChange, isTypeNumber = true, hasSuffix = false
-        )
-        Dimen.DefaultMarginHeight()
-
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            MyTextFieldWithTitle(
-                modifier = Modifier.weight(1f),
-                title = "Original Price",
-                value = "${viewModel.originalPrice}",
-                onValueChange = viewModel.orgPriceTextChange,
-                isTypeNumber = true,
-                hasSuffix = true
-            )
-            Dimen.DefaultMarginWidth()
-            MyTextFieldWithTitle(
-                modifier = Modifier.weight(1f),
-                title = "Selling Price",
-                value = "${viewModel.sellingPrice}",
-                onValueChange = viewModel.sellingPriceTextChange,
-                isTypeNumber = true,
-                hasSuffix = true
-            )
-
-        }
-        Dimen.DefaultMarginHeight()
-        Text(text = "Profit", style = MaterialTheme.typography.h6)
-        Box(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = paddingDefault)
-                .border(1.dp, accentAmber.copy(alpha = 0.5f))
-
+                .fillMaxSize()
+                .padding(8.dp)
         ) {
-            Text(
-                text = "${viewModel.profit} MMK",
+            MyTextFieldWithTitle(
+                title = "ProductName",
+                value = viewModel.productName,
+                onValueChange = { viewModel.productName = it })
+            Dimen.DefaultMarginHeight()
+            MyTextFieldWithTitle(
+                title = "Qty",
+                value = viewModel.qty,
+                onValueChange = viewModel.qtyTextChange,
+                isTypeNumber = true,
+                hasSuffix = false
+            )
+            Dimen.DefaultMarginHeight()
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                MyTextFieldWithTitle(
+                    modifier = Modifier.weight(1f),
+                    title = "Original Price",
+                    value = "${viewModel.originalPrice}",
+                    onValueChange = viewModel.orgPriceTextChange,
+                    isTypeNumber = true,
+                    hasSuffix = true
+                )
+                Dimen.DefaultMarginWidth()
+                MyTextFieldWithTitle(
+                    modifier = Modifier.weight(1f),
+                    title = "Selling Price",
+                    value = "${viewModel.sellingPrice}",
+                    onValueChange = viewModel.sellingPriceTextChange,
+                    isTypeNumber = true,
+                    hasSuffix = true
+                )
+
+            }
+            Dimen.DefaultMarginHeight()
+            Text(text = "Profit", style = MaterialTheme.typography.h6)
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(paddingDefault),
+                    .padding(top = paddingDefault)
+                    .border(1.dp, accentAmber.copy(alpha = 0.5f))
+
+            ) {
+                Text(
+                    text = "${viewModel.profit} MMK",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(paddingDefault),
+                )
+            }
+            ChoosePhotoLayout(
+                addImage = { uri: Uri, i: Int ->
+                    viewModel.addImage(uri, i)
+                }, imageList = imageList
             )
         }
-        ChoosePhotoLayout(
-            addImage = { uri: Uri, i: Int ->
-                viewModel.addImage(uri, i)
-            }, imageList = imageList
-        )
     }
+
 }

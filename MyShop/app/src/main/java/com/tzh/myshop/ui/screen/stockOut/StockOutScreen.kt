@@ -59,10 +59,7 @@ fun StockOutScreen(navController: NavController, viewModel: StockOutViewModel = 
     var deleteProduct: Product? by remember { mutableStateOf(null) }
 
     Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .padding(paddingDefault)
-            .padding(bottom = 56.dp)
+        modifier = Modifier.fillMaxHeight().padding(paddingDefault).padding(bottom = 56.dp)
     ) {
         ItemHeader()
         LazyColumn(modifier = Modifier.weight(1f)) {
@@ -145,9 +142,7 @@ fun StockOutScreen(navController: NavController, viewModel: StockOutViewModel = 
 fun ItemHeader() {
     Surface(color = backgroundColor.copy(alpha = 0.6f), modifier = Modifier.padding(bottom = 8.dp)) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(30.dp),
+            modifier = Modifier.fillMaxWidth().height(30.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -169,10 +164,7 @@ fun ListItem(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Gray.copy(0.2f))
-            .combinedClickable(
+        modifier = Modifier.fillMaxWidth().background(Color.Gray.copy(0.2f)).combinedClickable(
                 onClick = { onClick(product) },
                 onLongClick = { isConfirmDelete(product) },
             ),
@@ -222,7 +214,9 @@ fun AddProduct(
 ) {
     var productName by remember { mutableStateOf("") }
     val scaffoldState = rememberScrollState()
-    viewModel.getData(productName)
+    LaunchedEffect(key1 = productName, block = {
+        viewModel.getData(productName)
+    })
     val list = viewModel.filterList
     Dialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
@@ -231,9 +225,7 @@ fun AddProduct(
         },
     ) {
         Card(
-            backgroundColor = Color.White, modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingDefault)
+            backgroundColor = Color.White, modifier = Modifier.fillMaxSize().padding(paddingDefault)
         ) {
             Column(
                 modifier = Modifier.padding(paddingDefault), horizontalAlignment = Alignment.CenterHorizontally
@@ -253,9 +245,7 @@ fun AddProduct(
                 }
 
                 OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = paddingDefault),
+                    modifier = Modifier.fillMaxWidth().padding(top = paddingDefault),
                     value = productName,
                     onValueChange = {
                         productName = it
@@ -282,10 +272,7 @@ fun AddProduct(
                     items(list) { item: Product ->
 
                         Row(
-                            modifier = Modifier
-                                .height(35.dp)
-                                .fillMaxWidth()
-                                .background(Color.Gray.copy(0.2f))
+                            modifier = Modifier.height(35.dp).fillMaxWidth().background(Color.Gray.copy(0.2f))
                                 .clickable { onClick(item) }, verticalAlignment = Alignment.CenterVertically
                         ) {
                             BodyItem(text = item.productName, modifier = Modifier.weight(1f))
@@ -320,17 +307,13 @@ fun ConfirmDialog(onDismiss: (PopUpState) -> Unit, viewModel: StockOutViewModel)
         },
     ) {
         Card(
-            backgroundColor = Color.White, modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingDefault)
+            backgroundColor = Color.White, modifier = Modifier.fillMaxSize().padding(paddingDefault)
         ) {
             Column(
                 modifier = Modifier.padding(paddingDefault), horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 IconButton(
-                    modifier = Modifier
-                        .align(Alignment.End)
-                        .padding(bottom = paddingDefault),
+                    modifier = Modifier.align(Alignment.End).padding(bottom = paddingDefault),
                     onClick = {
                         onDismiss(PopUpState.CLOSE)
                     },
@@ -349,9 +332,7 @@ fun ConfirmDialog(onDismiss: (PopUpState) -> Unit, viewModel: StockOutViewModel)
                     }, itemContent = { product: Product ->
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(Color.Gray.copy(0.2f))
+                            modifier = Modifier.fillMaxWidth().background(Color.Gray.copy(0.2f))
                         ) {
                             BodyItem(text = product.productName, modifier = Modifier.weight(1f))
                             BodyItem(

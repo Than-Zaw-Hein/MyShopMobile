@@ -1,6 +1,5 @@
 package com.tzh.myshop.data.database.entity
 
-import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -19,4 +18,4 @@ data class Product(
     @ColumnInfo(name = "createDate") var createDate: String?=null,
     @ColumnInfo(name = "updatedDate") var updatedDate: String? = null,
     @ColumnInfo(name = "ImageList") var imageList: List<String?> = listOf(null, null, null),
-)
+):java.io.Serializable

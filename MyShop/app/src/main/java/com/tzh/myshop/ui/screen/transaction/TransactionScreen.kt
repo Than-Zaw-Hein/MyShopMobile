@@ -99,11 +99,6 @@ fun ItemHeader(transactionType: String) {
         Row(modifier = Modifier.fillMaxWidth()) {
             TitleItem(title = "Transaction Type", modifier = Modifier.weight(1f))
             TitleItem(title = "Create Date", modifier = Modifier.weight(1f))
-//            if (transactionType == Constant.TransactionType.SALE.getTypeName()) {
-//                TitleItem(
-//                    title = "Total Profit", modifier = Modifier.weight(1f)
-//                )
-//            }
         }
     }
 }
@@ -121,10 +116,5 @@ fun ListItem(transactionHeader: TransactionHeader, transactionType: String, onCl
     ) {
         BodyItem(text = transactionHeader.typeName, modifier = Modifier.weight(1f))
         BodyItem(text = transactionHeader.createDate, modifier = Modifier.weight(1f))
-//        if (transactionType == Constant.TransactionType.SALE.getTypeName()) {
-//            BodyItem(
-//                text = transactionHeader.totalProfit.toString(), modifier = Modifier.weight(1f)
-//            )
-//        }
     }
 }

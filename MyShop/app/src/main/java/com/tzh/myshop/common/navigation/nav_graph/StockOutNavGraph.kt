@@ -17,8 +17,6 @@ fun NavGraphBuilder.stockOutNavGraph(navController: NavController, currentRoute:
     ) {
         composable(route = Route.StockOut.route) {
             currentRoute(Route.StockOut)
-//            val parentEntry = it.rememberParentEntry(navController = navController)
-//            val viewModel: StockOutViewModel = hiltViewModel(parentEntry)
             StockOutScreen(navController)
         }
     }

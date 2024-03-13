@@ -1,10 +1,13 @@
 package com.tzh.myshop
 
-import android.R
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.animation.BounceInterpolator
+import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -17,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -26,7 +30,6 @@ import com.tzh.myshop.common.navigation.nav_graph.NavGraph
 import com.tzh.myshop.common.ulti.FloatingActionUIStates
 import com.tzh.myshop.ui.shareComponent.MyTopAppBar
 import com.tzh.myshop.ui.theme.MyShopTheme
-import com.tzh.myshop.ui.theme.primaryCharcoal
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -45,6 +48,21 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyShopTheme {
 
+                val launcher = rememberLauncherForActivityResult(
+                    ActivityResultContracts.RequestPermission()
+                ) { isGranted ->
+                    if (isGranted) {
+                        Toast.makeText(this, "Permission is granted", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                LaunchedEffect(key1 = launcher, block = {
+                    val permissionCheckResult = ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.CAMERA)
+                    if (permissionCheckResult != PackageManager.PERMISSION_GRANTED) {
+                        launcher.launch(Manifest.permission.CAMERA)
+                    }
+                })
+
                 val navController = rememberNavController()
                 val scaffoldState = rememberScaffoldState()
 
@@ -54,22 +72,17 @@ class MainActivity : ComponentActivity() {
                 var floatActionState by remember {
                     mutableStateOf(FloatingActionUIStates())
                 }
-                if (myRoute == Route.StockIN || myRoute == Route.StockEnquiryDetail) {
-                } else {
-                    floatActionState = FloatingActionUIStates()
-                }
                 Scaffold(
                     scaffoldState = scaffoldState,
                     backgroundColor = Color.White,
                     topBar = {
                         AnimatedVisibility(
-                            visible = myRoute == Route.StockEnquiryDetail || myRoute == Route.StockTransactionDetail,
+                            visible = myRoute == Route.StockTransactionDetail,
                             enter = fadeIn(tween(1000)) + expandVertically(
                                 animationSpec = tween(
                                     800,
                                 ),
-                            ),
-                            exit = fadeOut(tween(1000)) + shrinkVertically(
+                            ), exit = fadeOut(tween(1000)) + shrinkVertically(
                                 animationSpec = tween(
                                     800,
                                 )
@@ -78,7 +91,7 @@ class MainActivity : ComponentActivity() {
                             MyTopAppBar(navController = navController, myRoute = myRoute, scaffoldState)
                         }
                     },
-                    floatingActionButton = floatActionState.onFloatingActionButton ?: {},
+//                    floatingActionButton = floatActionState.onFloatingActionButton ?: {},
 //                    isFloatingActionButtonDocked = true,
                     bottomBar = {
                         AnimatedVisibility(
@@ -129,7 +142,7 @@ class MainActivity : ComponentActivity() {
                     },
                 ) {
                     NavGraph(navController, scaffoldState = scaffoldState, floatingActionStates = {
-                        floatActionState = it
+//                        floatActionState = it
                     }) {
                         myRoute = it
                     }

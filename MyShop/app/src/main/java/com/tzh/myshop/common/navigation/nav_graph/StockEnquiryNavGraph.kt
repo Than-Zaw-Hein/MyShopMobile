@@ -17,18 +17,6 @@ fun NavGraphBuilder.stockEnquiryNavGraph(
     navigation(
         startDestination = Route.StockEnquiryDetail.route, route = ROOT_STOCK_ENQUIRY_ROUTE
     ) {
-//        composable(route = Route.StockEnquiry.route) {
-//            currentRoute(Route.StockEnquiry)
-//            val parentEntry = it.rememberParentEntry(navController = navController)
-//            val viewModel: EnquiryViewModel = hiltViewModel(parentEntry)
-//            EnquiryScreen(navController, scaffoldState, viewModel)
-//        }
 
-//        composable(route = Route.StockEnquiryDetail.route) {
-//            currentRoute(Route.StockEnquiryDetail)
-//            val parentEntry = it.rememberParentEntry(navController = navController)
-//            val viewModel: EnquiryViewModel = hiltViewModel(parentEntry)
-//            EnquiryDetailScreen(navController, viewModel, onComposing = onComposing, scaffoldState)
-//        }
     }
 }

@@ -22,6 +22,7 @@ import com.tzh.myshop.common.navigation.Route
 import com.tzh.myshop.common.ulti.Extension.toJson
 import com.tzh.myshop.common.ulti.PopUpState
 import com.tzh.myshop.data.database.entity.Product
+import com.tzh.myshop.ui.screen.product_detail.ProductDetailActivity
 import com.tzh.myshop.ui.shareComponent.*
 import com.tzh.myshop.ui.theme.backgroundColor
 import com.tzh.myshop.ui.viewModel.HomeViewModel
@@ -81,7 +82,9 @@ fun HomeScreen(
         ListBody(
             uiState.productList,
             onClick = {
-                navController.navigate(Route.StockEnquiryDetail.navigateWithProduct(it.toJson()))
+                context.apply {
+                    startActivity(ProductDetailActivity.getNewIntent(this,it))
+                }
             },
             onDelete = {
                 viewModel.deleteProduct(it)

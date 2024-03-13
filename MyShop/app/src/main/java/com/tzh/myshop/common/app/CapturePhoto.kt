@@ -15,9 +15,6 @@ class ComposeFileProvider : FileProvider(R.xml.file_provider_paths) {
             val timeStamp = SimpleDateFormat("MMddHHmmss", Locale.getDefault()).format(Date())
             val mFileName = "JPEG_" + timeStamp + "_"
             val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-
-//            val directory = File(context.cacheDir, "images")
-//            directory.mkdirs()
             val file = File.createTempFile(mFileName, ".jpg", storageDir)
             val authority = context.packageName + ".provider"
             return getUriForFile(
