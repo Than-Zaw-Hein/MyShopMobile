@@ -14,7 +14,7 @@ object Constant {
 
     const val dateFormatPattern = "dd/MM/yyyy"
 
-    enum class TransactionType(id: Int, name: String) {
+    enum class TransactionType ( id: Int, name: String) {
         ALL(0, "ALL"), UPDATEITEM(1, "Update Item"), STOCKIN(2, "Stock In"), SALE(3, "Sale"), DELETE(4, "Delete");
 
         private var _id = id;

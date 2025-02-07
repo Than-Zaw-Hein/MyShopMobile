@@ -4,12 +4,10 @@ import android.R
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -25,17 +23,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.tzh.myshop.MainActivity
-import com.tzh.myshop.common.navigation.Route
 import com.tzh.myshop.data.database.entity.Product
 import com.tzh.myshop.ui.shareComponent.ChoosePhotoLayout
 import com.tzh.myshop.ui.shareComponent.Dimen
 import com.tzh.myshop.ui.shareComponent.MyTextFieldWithTitle
-import com.tzh.myshop.ui.shareComponent.MyTopAppBar
 import com.tzh.myshop.ui.theme.MyShopTheme
-import com.tzh.myshop.ui.theme.accentAmber
-import com.tzh.myshop.ui.theme.primaryCharcoal
+import com.tzh.myshop.ui.theme.SecondaryColor
+import com.tzh.myshop.ui.theme.PrimaryCharcoal
 import com.tzh.myshop.ui.viewModel.ProductDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -165,7 +160,7 @@ fun EnquiryDetailScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                backgroundColor = primaryCharcoal,
+                backgroundColor = PrimaryCharcoal,
                 onClick = {
                     viewModel.updateProduct()
                 },
@@ -222,7 +217,7 @@ fun EnquiryDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = Dimen.paddingDefault)
-                    .border(1.dp, accentAmber.copy(alpha = 0.5f))
+                    .border(1.dp, SecondaryColor.copy(alpha = 0.5f))
             ) {
                 Text(
                     text = "${viewModel.profit} MMK",

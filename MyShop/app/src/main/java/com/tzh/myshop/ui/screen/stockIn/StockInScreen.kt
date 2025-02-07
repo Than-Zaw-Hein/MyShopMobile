@@ -3,8 +3,6 @@ package com.tzh.myshop.ui.screen.stockIn
 import android.R
 import android.net.Uri
 import android.widget.Toast
-import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -23,9 +21,8 @@ import com.tzh.myshop.ui.shareComponent.ChoosePhotoLayout
 import com.tzh.myshop.ui.shareComponent.Dimen
 import com.tzh.myshop.ui.shareComponent.Dimen.paddingDefault
 import com.tzh.myshop.ui.shareComponent.MyTextFieldWithTitle
-import com.tzh.myshop.ui.shareComponent.MyTopAppBar
-import com.tzh.myshop.ui.theme.accentAmber
-import com.tzh.myshop.ui.theme.primaryCharcoal
+import com.tzh.myshop.ui.theme.SecondaryColor
+import com.tzh.myshop.ui.theme.PrimaryCharcoal
 import com.tzh.myshop.ui.viewModel.StockInViewModel
 
 @Composable
@@ -80,7 +77,7 @@ fun StockInScreen(
         floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.padding(bottom = 56.dp),
-                backgroundColor = primaryCharcoal,
+                backgroundColor = PrimaryCharcoal,
                 onClick = {
                     viewModel.createProduct()
                 },
@@ -136,7 +133,7 @@ fun StockInScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = paddingDefault)
-                    .border(1.dp, accentAmber.copy(alpha = 0.5f))
+                    .border(1.dp, SecondaryColor.copy(alpha = 0.5f))
 
             ) {
                 Text(

@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tzh.myshop.ui.theme.accentAmber
+import com.tzh.myshop.ui.theme.SecondaryColor
 
 object MyShopButton {
 
@@ -40,7 +40,7 @@ object MyShopButton {
     fun PerformButton(title: String, modifier: Modifier = Modifier, isEnabled: Boolean = true, onClick: () -> Unit) {
         Button(
             onClick = onClick, modifier = modifier, colors = ButtonDefaults.buttonColors(
-                backgroundColor = accentAmber, contentColor = Color.White
+                backgroundColor = SecondaryColor, contentColor = Color.White
             ), enabled = isEnabled
         ) {
             ButtonText(text = title)
@@ -58,10 +58,6 @@ object MyShopButton {
         TextButton(
             modifier = modifier,
             onClick = onClick,
-
-            colors = ButtonDefaults.textButtonColors(
-                contentColor = Color.Blue.copy(0.7f)
-            ),
         ) {
             Text(text = title, textAlign = TextAlign.Start, modifier = modifier)
         }

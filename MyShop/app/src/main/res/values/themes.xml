@@ -3,10 +3,19 @@
 
     <style name="Theme.MyShop" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/primaryColor</item>
+        <item name="android:colorPrimary">@color/primaryColor</item>
+        <item name="android:colorSecondary">@color/secondaryColor</item>
     </style>
-
 
     <style name="CalenderViewCustom" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
 
+    </style>
+
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@android:color/holo_orange_dark</item>
+    </style>
+
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@android:color/holo_green_dark</item>
     </style>
 </resources>

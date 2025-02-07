@@ -1,33 +1,32 @@
 package com.tzh.myshop.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
-    primary = primaryGreen,
-    primaryVariant = primaryCharcoal,
-    secondary = accentAmber
+    primary = PrimaryColor,
+    primaryVariant = PrimaryCharcoal,
+    onPrimary = Color.Black,
+    secondary = SecondaryColor,
+    onSecondary = Color.Black,
 )
 
 private val LightColorPalette = lightColors(
-    primary = primaryGreen,
-    primaryVariant = primaryCharcoal,
-    secondary = accentAmber
+    primary = PrimaryColor,
+    primaryVariant = PrimaryCharcoal,
+    onPrimary = Color.Black,
+    secondary = SecondaryColor,
+    onSecondary = Color.Black,
 )
 
 @Composable
-fun MyShopTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+fun MyShopTheme(content: @Composable () -> Unit) {
 
     MaterialTheme(
-        colors = colors,
+        colors = DarkColorPalette,
         typography = Typography,
         shapes = Shapes,
         content = content

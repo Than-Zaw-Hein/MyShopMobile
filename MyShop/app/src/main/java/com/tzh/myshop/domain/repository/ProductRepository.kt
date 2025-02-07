@@ -32,7 +32,9 @@ class ProductRepository @Inject constructor(
 
         Log.e("ASD", Constant.TransactionType.STOCKIN.getId().toString())
         val header = TransactionHeader(
-            typeName = Constant.TransactionType.STOCKIN.getTypeName(), createDate = Constant.getCurrentTime(), totalProfit = 0,
+            typeName = Constant.TransactionType.STOCKIN.getTypeName(),
+            createDate = Constant.getCurrentTime(),
+            totalProfit = 0,
         )
 
         val transactionHeaderId = transactionHeaderDao.insert(header)

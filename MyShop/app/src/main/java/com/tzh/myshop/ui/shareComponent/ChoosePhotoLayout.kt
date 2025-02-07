@@ -142,7 +142,7 @@ fun ChooseImageDialog(setShowDialog: (PopUpState) -> Unit, setImage: (Uri?) -> U
         checkPermission() { isGranted ->
             if (isGranted) {
                 imageUri = ComposeFileProvider.getImageUri(context)
-                cameraLauncher.launch(imageUri)
+                cameraLauncher.launch(imageUri!!)
             } else {
                 Toast.makeText(
                     context, "When you take photo camera permission is needed,please grant camara permission", Toast.LENGTH_LONG

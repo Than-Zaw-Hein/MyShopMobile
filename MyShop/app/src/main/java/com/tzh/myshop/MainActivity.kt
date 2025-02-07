@@ -47,7 +47,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyShopTheme {
-
                 val launcher = rememberLauncherForActivityResult(
                     ActivityResultContracts.RequestPermission()
                 ) { isGranted ->
@@ -55,7 +54,6 @@ class MainActivity : ComponentActivity() {
                         Toast.makeText(this, "Permission is granted", Toast.LENGTH_LONG).show()
                     }
                 }
-
                 LaunchedEffect(key1 = launcher, block = {
                     val permissionCheckResult = ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.CAMERA)
                     if (permissionCheckResult != PackageManager.PERMISSION_GRANTED) {
@@ -74,23 +72,23 @@ class MainActivity : ComponentActivity() {
                 }
                 Scaffold(
                     scaffoldState = scaffoldState,
-                    backgroundColor = Color.White,
-                    topBar = {
-                        AnimatedVisibility(
-                            visible = myRoute == Route.StockTransactionDetail,
-                            enter = fadeIn(tween(1000)) + expandVertically(
-                                animationSpec = tween(
-                                    800,
-                                ),
-                            ), exit = fadeOut(tween(1000)) + shrinkVertically(
-                                animationSpec = tween(
-                                    800,
-                                )
-                            )
-                        ) {
-                            MyTopAppBar(navController = navController, myRoute = myRoute, scaffoldState)
-                        }
-                    },
+//                    backgroundColor = Color.White,
+//                    topBar = {
+//                        AnimatedVisibility(
+//                            visible = myRoute == Route.StockTransactionDetail,
+//                            enter = fadeIn(tween(1000)) + expandVertically(
+//                                animationSpec = tween(
+//                                    800,
+//                                ),
+//                            ), exit = fadeOut(tween(1000)) + shrinkVertically(
+//                                animationSpec = tween(
+//                                    800,
+//                                )
+//                            )
+//                        ) {
+//                            MyTopAppBar(navController = navController, myRoute = myRoute, scaffoldState)
+//                        }
+//                    },
 //                    floatingActionButton = floatActionState.onFloatingActionButton ?: {},
 //                    isFloatingActionButtonDocked = true,
                     bottomBar = {

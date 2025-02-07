@@ -15,12 +15,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tzh.myshop.ui.shareComponent.Dimen.paddingDefault
-import com.tzh.myshop.ui.theme.primaryCharcoal
+import com.tzh.myshop.ui.theme.PrimaryCharcoal
 
 @Composable
 fun MyTextFieldWithTitle(
@@ -50,7 +49,7 @@ fun MyTextFieldWithTitle(
                 .padding(top = paddingDefault)
                 .fillMaxWidth()
                 .height(35.dp)
-                .border(color = primaryCharcoal, width = 1.dp)
+                .border(color = PrimaryCharcoal, width = 1.dp)
         ) {
             BasicTextField(
                 singleLine = true,
